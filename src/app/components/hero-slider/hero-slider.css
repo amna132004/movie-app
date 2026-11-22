@@ -1,0 +1,251 @@
+:host {
+  display: block;
+}
+
+.hero {
+  position: relative;
+  height: calc(100vh - 72px); /* 72px = hauteur de la head-bar */
+  min-height: 520px;
+  overflow: hidden;
+  background: var(--bg);}
+
+/* ---------- Search + filter (en haut du hero) ---------- */
+.hero-search {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  right: 0;
+  z-index: 6;
+}
+
+/* ---------- Slides ---------- */
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding-top: 90px; /* laisse la place à la search bar */
+  background-size: cover;
+  background-position: center top;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.9s ease, visibility 0.9s;
+}
+
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.5) 50%, rgba(15, 23, 42, 0.1) 100%),
+    linear-gradient(0deg, var(--bg) 0%, transparent 35%);}
+
+.content {
+  position: relative;
+  max-width: 560px;
+  padding: 0 80px;
+  color: #f1f5f9;
+}
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  margin-bottom: 14px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.rating fa-icon {
+  color: #facc15;
+}
+
+.content h2 {
+  margin: 0 0 14px;
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.content p {
+  margin: 0 0 24px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #cbd5e1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.details-btn {
+  padding: 12px 28px;
+  background: linear-gradient(90deg, #ec4899, #f97316);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(236, 72, 153, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.details-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(236, 72, 153, 0.55);
+}
+
+/* ---------- Flèches ---------- */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.arrow:hover {
+  background: #ec4899;
+}
+
+.arrow.left {
+  left: 20px;
+}
+
+.arrow.right {
+  right: 20px;
+}
+
+/* ---------- Dots ---------- */
+.dots {
+  position: absolute;
+  bottom: 140px;
+  left: 80px;
+  z-index: 5;
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.35);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.dot.active {
+  width: 30px;
+  background: #ec4899;
+}
+
+/* ---------- Scroll down ---------- */
+.scroll-down {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 36px;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.scroll-down:hover {
+  background: rgba(236, 72, 153, 0.35);
+  border-color: #ec4899;
+}
+
+.scroll-down fa-icon {
+  font-size: 32px;
+  color: #ec4899;
+  animation: bounce 1.6s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 600px) {
+  .hero {
+    height: calc(100vh - 60px);
+  }
+
+  .hero-search {
+    top: 16px;
+  }
+
+  .slide {
+    padding-top: 130px;
+  }
+
+  .content {
+    padding: 0 24px;
+  }
+
+  .content h2 {
+    font-size: 30px;
+  }
+
+  .arrow {
+    display: none;
+  }
+
+  .dots {
+    left: 24px;
+    bottom: 130px;
+  }
+
+  .scroll-down {
+    font-size: 14px;
+    padding: 10px 24px;
+  }
+
+  .scroll-down fa-icon {
+    font-size: 24px;
+  }
+}

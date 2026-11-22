@@ -1,0 +1,22 @@
+<app-hero-slider />
+<section id="movies" class="list-section">
+  <div class="search-wrapper">
+    <app-search-bar />
+  </div>
+<div class="container">
+    @for (movie of movieService.sortedMovieList(); track movie.id) {
+        <div class="movie-card" (click)="navigateTo(movie)">
+            <div>
+                <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" alt="{{movie.title}}" />
+            </div>
+            <div class="movie-details">
+                <h2>
+                    {{movie.title}}
+                </h2>
+
+            </div>
+        </div>
+
+    } 
+</div>
+</section>

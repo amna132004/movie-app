@@ -1,0 +1,17 @@
+<div class="container" >
+    <div class="search-container">
+   <label for="title">Title</label>
+   <input type="text" #movieTitle id="title" placeholder="e.g Deexter" (input)="getMovieByTitle(movieTitle.value)">
+   <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
+</div>
+<div class="filter-container">
+    <label for="filter">Sort By</label>
+    <select id="filter" #filter (change)="onFilterChange(filter.value)">
+  <option value="" [selected]="movieService.sortBy() === ''">Default</option>
+  <option value="title-asc" [selected]="movieService.sortBy() === 'title-asc'">Title (A → Z)</option>
+  <option value="title-desc" [selected]="movieService.sortBy() === 'title-desc'">Title (Z → A)</option>
+  <option value="date-desc" [selected]="movieService.sortBy() === 'date-desc'">Newest</option>
+  <option value="date-asc" [selected]="movieService.sortBy() === 'date-asc'">Oldest</option>
+</select>
+  </div>
+</div>

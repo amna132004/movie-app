@@ -1,0 +1,53 @@
+@if (movieService.showRecommendations()) {
+  <div class="backdrop" (click)="close()">
+    <div class="modal" (click)="$event.stopPropagation()" role="dialog" aria-modal="true" aria-label="Recommendations">
+      <button class="close" (click)="close()" aria-label="Close">✕</button>
+
+      <h2>What should I watch tonight?</h2>
+
+      <p class="step">1. Pick your mood</p>
+      <div class="chips">
+        @for (mood of moods; track mood.name) {
+          <button
+            class="chip"
+            [class.on]="mood.name === selectedMood().name"
+            (click)="selectMood(mood)"
+          >{{ mood.name }}</button>
+        }
+      </div>
+
+      <p class="step">2. Spin the roulette</p>
+      <div class="slot" [class.spinning]="spinning()">{{ display() }}</div>
+      <button class="spin-btn" (click)="spin()" [disabled]="spinning()">
+        {{ spinning() ? 'Spinning…' : 'Spin the roulette' }}
+      </button>
+
+      @if (error()) {
+        <p class="error">{{ error() }}</p>
+      }
+
+      @if (result(); as movie) {
+        <div class="result">
+          <img
+            class="poster"
+            src="https://image.tmdb.org/t/p/w185{{movie.poster_path}}"
+            alt="{{movie.title}}"
+          />
+          <div class="info">
+            <p class="label">Tonight's pick</p>
+            <h3>{{ movie.title }}</h3>
+            <p class="meta">{{ movie.release_date.slice(0, 4) }} · {{ movie.vote_average.toFixed(1) }} / 10</p>
+            <p class="overview">{{ movie.overview }}</p>
+            <div class="actions">
+              <button (click)="viewDetails(movie)">View details</button>
+              <button class="secondary" (click)="addToWish(movie)" [disabled]="isInWish()">
+                {{ isInWish() ? 'Added ✓' : 'Add to Wish list' }}
+              </button>
+              <button class="secondary" (click)="spin()" [disabled]="spinning()">Spin again</button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+}

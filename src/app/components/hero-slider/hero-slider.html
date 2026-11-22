@@ -1,0 +1,46 @@
+<section class="hero">
+    <div class="hero-search">
+    <app-search-bar />
+  </div>
+  @for (movie of slides(); track movie.id; let i = $index) {
+    <div
+      class="slide"
+      [class.active]="i === current()"
+      [style.background-image]="'url(https://image.tmdb.org/t/p/original' + movie.backdrop_path + ')'"
+    >
+      <div class="overlay"></div>
+
+      <div class="content">
+        <span class="rating">
+          <fa-icon [icon]="faStar"></fa-icon> {{ movie.vote_average.toFixed(1) }}
+        </span>
+        <h2>{{ movie.title }}</h2>
+        <p>{{ movie.overview }}</p>
+        <button class="details-btn" (click)="openMovie(movie)">View details</button>
+      </div>
+    </div>
+  }
+
+  <button class="arrow left" (click)="onArrow('prev')" aria-label="Previous">
+    <fa-icon [icon]="faChevronLeft"></fa-icon>
+  </button>
+  <button class="arrow right" (click)="onArrow('next')" aria-label="Next">
+    <fa-icon [icon]="faChevronRight"></fa-icon>
+  </button>
+
+  <div class="dots">
+    @for (movie of slides(); track movie.id; let i = $index) {
+      <button
+        class="dot"
+        [class.active]="i === current()"
+        (click)="goTo(i)"
+        [attr.aria-label]="'Movie ' + (i + 1)"
+      ></button>
+    }
+  </div>
+
+  <button class="scroll-down" (click)="scrollToList()">
+    <span>Discover movies</span>
+    <fa-icon [icon]="faChevronDown"></fa-icon>
+  </button>
+</section>

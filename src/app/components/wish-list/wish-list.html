@@ -1,0 +1,24 @@
+<section class="wishlist">
+  <div class="top">
+    <h2>My Wish list</h2>
+    <button class="back-btn" (click)="movieService.backToMovieList()">Back to movie list</button>
+  </div>
+
+  @if (movieService.wishList().length === 0) {
+    <p class="empty">Your wish list is empty. Open a movie and click "Add to Wishlist".</p>
+  } @else {
+    <div class="container">
+      @for (movie of movieService.wishList(); track movie.id) {
+        <div class="movie-card" (click)="navigateTo(movie)">
+          <div>
+            <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" alt="{{movie.title}}" />
+          </div>
+          <div class="movie-details">
+            <h2>{{ movie.title }}</h2>
+          </div>
+          <button class="remove-btn" (click)="remove(movie, $event)">Remove</button>
+        </div>
+      }
+    </div>
+  }
+</section>

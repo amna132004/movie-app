@@ -1,0 +1,20 @@
+<!-- <div class="container">
+    <h1>My Movie-DB</h1>
+<button>
+  Wish list <fa-icon [icon]="faHeart"></fa-icon>
+</button></div> -->
+<div class="container">
+    <h1 class="logo" (click)="goHome()">My Movie-DB</h1>
+    <div class="actions">
+        <button (click)="theme.toggle()"
+                [title]="theme.theme() === 'dark' ? 'Morning mode' : 'Night mode'">
+            <fa-icon [icon]="theme.theme() === 'dark' ? faSun : faMoon"></fa-icon>
+        </button>
+        <button class="reco-btn" (click)="openRecommendations()">
+  <fa-icon [icon]="faDice"></fa-icon> <span class="label">Recommendations</span>
+</button>
+        <button (click)="navigateToWishList()">
+            Wish list <fa-icon [icon]="faHeart"></fa-icon>
+        </button>
+    </div>
+</div>
